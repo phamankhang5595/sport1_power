@@ -69,6 +69,31 @@ static void IRF_CallBackHandle(void)
     }
 }
 
+/* nen de ham nay tren phan irfapp + thay phan xu ly queue bang 1 ham get command */
+/* 
+int IRF_GetCommand(irf_Command_t *irf_CommandBuff)
+{
+    if(!QUEUE_Empty(&irf_CommandQueue))
+    {
+        QUEUE_Get(&irf_CommandQueue,(u8*)irf_CommandBuff);
+        return 1;
+    }
+    return 0;
+}
+
+tren irfapp:
+void APP_Proc(void)
+{
+    irf_Command_t irf_CommandBuff;
+    if(IRF_GetCommand(&irf_CommandBuff))
+    {
+        APP_CheckCommandExistAndExecutes(irf_CommandBuff.command,
+                                         irf_CommandBuff.type,
+                                         irf_CommandBuff.buff,
+                                         irf_CommandBuff.length);
+    }
+}
+*/
 /**
  * @func    IRF_Proc
  * @brief   None
@@ -80,6 +105,7 @@ void IRF_Proc(void)
     if(!QUEUE_Empty(&irf_CommandQueue))
     {
         QUEUE_Get(&irf_CommandQueue, (u8*)&irf_CommandBuff);
+        /* mid call app ? (irfapp_main.c)*/
         APP_CheckCommandExistAndExecutes(\
             irf_CommandBuff.command, irf_CommandBuff.type,\
             irf_CommandBuff.buff, irf_CommandBuff.length); 

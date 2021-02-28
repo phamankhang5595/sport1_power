@@ -29,8 +29,10 @@
  */
 void MAIN_Init(void)
 {
+    /* Set P10 as GPIO first */
     MOTOR_Config();
     RELAY_Config();
+    /* Then set P10 as PWM */
     MOTOR_Init(DEFAULTSPEEP);
     FLOOR_Init();
     TICK_Init();

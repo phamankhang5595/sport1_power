@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.0.0   FLOOR                                                             01/31/2021 11:17:48 PAGE 1   
+C51 COMPILER V9.60.0.0   FLOOR                                                             02/26/2021 21:36:05 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE FLOOR
 OBJECT MODULE PLACED IN .\Objects\floor.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Mid\floor.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\App;..\Mid;..\Dr
-                    -iver;..\Utilities;..\Common) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\floor.lst) TABS(2) OBJECT(.\Objects\floor.ob
-                    -j)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Mid\floor.c LARGE OPTIMIZE(0,SPEED) BROWSE INCDIR(..\App;..\Mid;..\Dr
+                    -iver;..\Utilities;..\Common) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND LISTINCLUDE PRINT(.\floor.lst) TABS(2) PREPRINT(.\fl
+                    -oor.i) OBJECT(.\Objects\floor.obj)
 
 line level    source
 
@@ -17,16 +17,117 @@ line level    source
    6           */
    7          
    8          #include "floor.h"
+   1      =1  /*
+   2      =1   *  floor.h
+   3      =1   *
+   4      =1   *  Created on: Dec 25, 2020
+   5      =1   *      Author: Truong VV
+   6      =1   */
+   7      =1  
+   8      =1  #ifndef FLOOR_H
+   9      =1  #define FLOOR_H
+  10      =1  
+  11      =1  /******************************************************************************/
+  12      =1  /*                              DEFINE                                      */
+  13      =1  /******************************************************************************/
+  14      =1  #include <stdint.h>
 *** WARNING C318 IN LINE 14 OF ..\Mid\floor.h: can't open file 'stdint.h'
+  15      =1  /******************************************************************************/
+  16      =1  /*                              FUNCTION                                      */
+  17      =1  /******************************************************************************/
+  18      =1  void FLOOR_Init(void);
+  19      =1  void FLOOR_SetPercent(uint8_t percent);
 *** ERROR C141 IN LINE 19 OF ..\Mid\floor.h: syntax error near 'percent', expected ')'
+  20      =1  uint8_t FLOOR_GetPercent(void);
 *** ERROR C129 IN LINE 20 OF ..\Mid\floor.h: missing ';' before 'FLOOR_GetPercent'
+  21      =1  void FLOOR_ResetPercent(void);
+  22      =1  #endif /*FLOOR_H*/
    9          #include "adc.h"
+   1      =1  /*
+   2      =1   * Copyright (c) 2021
+   3      =1   * Team, JSC.
+   4      =1   * All Rights Reserved
+   5      =1   *
+   6      =1   *
+   7      =1   * Description:
+   8      =1   *
+   9      =1   * Author: Truongvv
+  10      =1   *
+  11      =1   * Last Changed By:  $Author: Truongvv $
+  12      =1   * Revision:         $Revision: 1.0 $
+  13      =1   * Last Changed:     $Date: x/x/xxxx $
+  14      =1   */
+  15      =1  
+  16      =1  #ifndef ADC_H_
+  17      =1  
+  18      =1  #define ADC_H_
+  19      =1  
+C51 COMPILER V9.60.0.0   FLOOR                                                             02/26/2021 21:36:05 PAGE 2   
+
+  20      =1  #define ADC_UP_DOWN_CHANNEL         6
+  21      =1  
+  22      =1  /******************************************************************************/
+  23      =1  /*                              INCLUDE FILES                                 */
+  24      =1  /******************************************************************************/
+  25      =1  
+  26      =1  
+  27      =1  /******************************************************************************/
+  28      =1  /*                     EXPORTED TYPES and DEFINITIONS                         */
+  29      =1  /******************************************************************************/
+  30      =1  
+  31      =1  /******************************************************************************/
+  32      =1  /*                            EXPORTED FUNCTIONS                              */
+  33      =1  /******************************************************************************/
+  34      =1  void ADC_Init (void);
+  35      =1  uint16_t ADC_Read (uint8_t channel);
+  36      =1  
+  37      =1  
+  38      =1  #endif  /* ADC_H_*/
   10          #include "relay.h"
+   1      =1  
+   2      =1  /*
+   3      =1   *  relay.h
+   4      =1   *
+   5      =1   *  Created on: Dec 25, 2020
+   6      =1   *      Author: Truong VV
+   7      =1   */
+   8      =1  
+   9      =1  #ifndef _RELAY_H_
+  10      =1  #define _RELAY_H_
+  11      =1  /******************************************************************************/
+  12      =1  /*                              DEFINE                                      */
+  13      =1  /******************************************************************************/
+  14      =1  #define DEFRELAYCONFIG_H
+  15      =1  
+  16      =1  #define ON                  1
+  17      =1  #define OFF                 0
+  18      =1  #define RELAY_AC_PORT       P1
+  19      =1  #define RELAY_UPDOWN_PORT   P0   
+  20      =1  #define RELAY_AC_PIN        5
+  21      =1  #define RELAY_UP_PIN        0   
+  22      =1  #define RELAY_DOWN_PIN      1
+  23      =1  #define RELAYAC_Init()      P15_PushPull_Mode
+  24      =1  #define RELAYUP_Init()      P00_PushPull_Mode
+  25      =1  #define RELAYDOWN_Init()    P01_PushPull_Mode
+  26      =1  /******************************************************************************/
+  27      =1  /*                              FUNCTION                                      */
+  28      =1  /******************************************************************************/
+  29      =1  
+  30      =1  void RELAY_Config (void);
+  31      =1  void RELAY_AC(unsigned char state);
+  32      =1  void RELAY_Up(void);
+  33      =1  void RELAY_UpReset(void);
+  34      =1  void RELAY_Down(void);
+  35      =1  void RELAY_DownReset(void);
+  36      =1  
+  37      =1  #endif /* _RELAY_H_/
   11          
   12          /******************************************************************************/
   13          /*                              DECLARE                                       */
   14          /******************************************************************************/
   15          
+C51 COMPILER V9.60.0.0   FLOOR                                                             02/26/2021 21:36:05 PAGE 3   
+
   16          /******************************************************************************/
   17          /*                              FUNCTION                                      */
   18          /******************************************************************************/
@@ -62,8 +163,6 @@ line level    source
   48          }
   49          /**
   50           * @func   FLOOR_ResetPercent
-C51 COMPILER V9.60.0.0   FLOOR                                                             01/31/2021 11:17:48 PAGE 2   
-
   51           * @brief  None
   52           * @param  
   53           * @retval None

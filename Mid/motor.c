@@ -56,6 +56,7 @@ void MOTOR_SetSpeed(uint16_t currentDuty, uint16_t desireDuty)
     uint16_t i = 0;
     if(currentDuty >= desireDuty)
     {
+        /* turn down speed slowly */
         for(i = currentDuty; i >= desireDuty; i--)
         {
             PWM_CreatedPeriodDuty(i);
@@ -63,6 +64,7 @@ void MOTOR_SetSpeed(uint16_t currentDuty, uint16_t desireDuty)
         }
     }else
     {
+        /* turn up speed slowly */
         for(i = currentDuty; i <= desireDuty; i++)
         {
             PWM_CreatedPeriodDuty(i);

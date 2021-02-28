@@ -18,7 +18,18 @@
 /******************************************************************************/
 /*                              DECLARE                                      */
 /******************************************************************************/
-
+/*
+                           command          type                senquence   length     buff[5] (result)
+uint8_t checkConnect[]  = {CHECK_CONNECT,   SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0x8A};
+uint8_t startRun[]      = {START_RUN,       SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0x9A};
+uint8_t stopRun[]       = {STOP_RUN,        SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0xEA};
+uint8_t updownFloor[]   = {UP_DOW_FLOOR,    SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0xFA};
+uint8_t getStateMotor[] = {GET_STATE_MOTOR, SLAVE_REPONSE_TYPE, 0x00,       0x01,      IS_NOTMOTOR, 0xA2};
+uint8_t getStateFloor[] = {GET_STATE_FLOOR, SLAVE_REPONSE_TYPE, 0x00,       0x01,      IS_NOTFLOOR, 0xA6};
+uint8_t setSpeedMotor[] = {SET_SPEED_MOTOR, SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0x2A};
+uint8_t getAllState[]   = {GET_ALL_STATE,   SLAVE_REPONSE_TYPE, 0x00,       0x02,      CHECK_CONNECT_SUCCESS, IS_HAVEMOTOR, 0x63};
+uint8_t resetDevice[]   = {RESET_DEVICE,    SLAVE_REPONSE_TYPE, 0x00,       0x01,      YES, 0xA5};
+*/
 uint8_t checkConnect[]  = {0x20, 0xA1, 0x00, 0x01, 0x0A, 0x8A};
 uint8_t startRun[]      = {0x30, 0xA1, 0x00, 0x01, 0x0A, 0x9A};
 uint8_t stopRun[]       = {0x40, 0xA1, 0x00, 0x01, 0x0A, 0xEA};
@@ -42,6 +53,12 @@ extern volatile uint8_t resetDeviceFlag = 0;
 extern volatile uint8_t speedValue;
 
 uint16_t currentDuty;
+/* should add ?:
+enum (state)
+{
+    OK;
+    NOT_OK
+} */
 uint8_t stateConnectFlag;
 uint8_t stateMotorFlag;
 uint8_t stateFloorFlag;
@@ -109,7 +126,7 @@ void funcHandle_AllFlag(void)
  */
 void funcHandle_DeviceAnnounceFlag(void)
 {
-    
+    /* thong bao ve loi + trang thai hien tai ? */
 }
 /**
  * @func   funcHandle_CheckConnectFlag
@@ -121,8 +138,10 @@ void funcHandle_CheckConnectFlag(void)
 {
     checkConnectFlag = 0;
     IRF_Send(checkConnect, sizeof(checkConnect));
+    /* add: kiem tra connect sau do bat co neu ok ?*/
     stateConnectFlag = 1;
 }
+
 /**
  * @func   funcHandle_StartRunFlag
  * @brief  None
@@ -131,10 +150,15 @@ void funcHandle_CheckConnectFlag(void)
  */
 void funcHandle_StartRunFlag(void)
 {
+    /* clear flag */
     startRunFlag = 0;
+    /* respon to master */
     IRF_Send(startRun, sizeof(startRun));
+    /* turn on relay */
     RELAY_AC(ON);
+    /* start motor at default speed ?*/
     MOTOR_SetSpeed(DEFAULTDUTY, DEFAULTSPEEP);
+    /* get current duty */
     currentDuty = DEFAULTSPEEP;
 }
 /**
@@ -145,10 +169,14 @@ void funcHandle_StartRunFlag(void)
  */
 void funcHandle_StopRunFlag(void)
 {
-
+    /* clear flag */
     stopRunFlag = 0;
+    /* respon to master */
     IRF_Send(stopRun, sizeof(stopRun));
-    MOTOR_SetSpeed(currentDuty, DEFAULTDUTY);
+
+    /* stop motor ? */
+    MOTOR_SetSpeed(currentDuty, DEFAULTDUTY);    /* set defalut speed */
+    /* turn of relay */
     RELAY_AC(OFF);
 }
 /**
@@ -173,6 +201,9 @@ void funcHandle_GetStateMotorFlag(void)
 {
     getStateMotorFlag = 0;
     IRF_Send(getStateMotor, sizeof(getStateMotor));
+    /* add: kiem tra motor neu ok thi bat co ? */
+    /* stateMotorFlag =1; */
+    /* sau do gui lai len master trang thai motor ? IS_HAVEMOTOR or IS_NOTMOTOR*/
 }
 /**
  * @func   funcHandle_GetStateFloorFlag
@@ -184,6 +215,8 @@ void funcHandle_GetStateFloorFlag(void)
 {
     getStateFloorFlag = 0;
     IRF_Send(getStateFloor, sizeof(getStateFloor));
+    /* check floor state then turn flag ? stateFloorFlag = 1;*/
+    /* sendback state to master ? IS_HAVEFLOOR or IS_NOTFLOOR */
 }
 
 /**
@@ -194,6 +227,7 @@ void funcHandle_GetStateFloorFlag(void)
  */
 void funcHandle_SetSpeedMotorFlag(void)
 {
+    /* speed motor desire ??? */
     uint16_t desireDuty;
     setSpeedMotorFlag = 0;
     IRF_Send(setSpeedMotor, sizeof(setSpeedMotor));
@@ -219,6 +253,7 @@ void funcHandle_GetAllStateFlag(void)
     {
         getAllState[4] = CHECK_CONNECT_NOTSUCCESS;
     }
+
     if(stateMotorFlag == 1)
     {
         getAllState[5] = IS_HAVEMOTOR;
@@ -226,6 +261,8 @@ void funcHandle_GetAllStateFlag(void)
     {
         getAllState[5] = IS_NOTMOTOR;
     }
+
+    /* floor state ??? */
     getAllState[6] = XOR_Caculator(getAllState, 0, sizeof(getAllState)-1);
     IRF_Send(getAllState, sizeof(getAllState));
 }
@@ -240,5 +277,5 @@ void funcHandle_ResetDeviceFlag(void)
 {
     resetDeviceFlag = 0;
     IRF_Send(resetDevice, sizeof(resetDevice));
-
+    /* reset device */
 }

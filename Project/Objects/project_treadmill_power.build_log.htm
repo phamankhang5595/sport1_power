@@ -3,12 +3,12 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.27.1.0
-Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: truong vu van, bkx, LIC=58EQD-8KYQR-19VG6-DD63J-ESB4K-88YB2
+IDE-Version: µVision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: khang Admin, khang123, LIC=----
  
 Tool Versions:
-Toolchain:       PK51 Prof. Developers Kit  Version: 9.60.0.0
+Toolchain:       PK51 Prof. Develpers Kit  Version: 9.60.0.0
 Toolchain Path:  C:\Keil_v5\C51\BIN
 C Compiler:      C51.exe V9.60.0.0
 Assembler:       A51.exe V8.2.7.0
@@ -21,20 +21,67 @@ Target DLL:      Nuvoton_8051_Keil_uVision_Driver.dll V3.00
 Dialog DLL:      TP51.DLL V2.60.0.0
  
 <h2>Project:</h2>
-D:\Project\NUVOTON\Project_Treadmill_Power\Git\sport1_power\Project\project_treadmill_power.uvproj
-Project File Date:  01/31/2021
+C:\Users\Admin\Desktop\Vtech_Sport1\sport1_power\Project\project_treadmill_power.uvproj
+Project File Date:  02/26/2021
 
 <h2>Output:</h2>
-Build target 'Target 1'
+Rebuild target 'Target 1'
+compiling irfapp_main.c...
+..\App\irfapp_main.c(103): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(103): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(103): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(114): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(114): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(114): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(125): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(125): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(125): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(136): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(136): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(136): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(147): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(147): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(147): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(158): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(158): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(158): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(170): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(170): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(170): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(181): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(181): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(193): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(193): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(193): warning C280: 'length': unreferenced local variable
+..\App\irfapp_main.c(204): warning C280: 'type': unreferenced local variable
+..\App\irfapp_main.c(204): warning C280: 'buff': unreferenced local variable
+..\App\irfapp_main.c(204): warning C280: 'length': unreferenced local variable
+compiling main.c...
+compiling main_init.c...
+..\App\main_init.c(37): warning C206: 'FLOOR_Init': missing function-prototype
 compiling mainfunclist.c...
-..\App\mainfunclist.c(229): warning C206: 'XOR_Caculator': missing function-prototype
-..\App\mainfunclist.c(229): error C267: 'XOR_Caculator': requires ANSI-style prototype
+..\App\mainfunclist.c(240): warning C206: 'XOR_Caculator': missing function-prototype
+..\App\mainfunclist.c(240): error C267: 'XOR_Caculator': requires ANSI-style prototype
+compiling adc.c...
+compiling delay.c...
+compiling pwm.c...
+compiling timer.c...
+compiling uart.c...
+compiling Irf.c...
+..\Utilities\xor.h(13): warning C318: can't open file 'stdint.h'
+compiling motor.c...
+compiling relay.c...
+compiling tick.c...
 compiling floor.c...
 ..\Mid\floor.h(14): warning C318: can't open file 'stdint.h'
 ..\Mid\floor.h(19): error C141: syntax error near 'percent', expected ')'
 ..\Mid\floor.h(20): error C129: missing ';' before 'FLOOR_GetPercent'
+assembling STARTUP.A51...
+compiling queue.c...
+compiling xor.c...
+..\Utilities\xor.h(13): warning C318: can't open file 'stdint.h'
 Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

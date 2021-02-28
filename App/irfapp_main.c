@@ -93,6 +93,7 @@ void APP_CheckCommandExistAndExecutes(u8 command, u8 type, u8* buff, u8 length)
     }
 }
 
+/* Executes func*/
 
 /**
  * @func   APP_DeviceAnnounce
@@ -102,6 +103,7 @@ void APP_CheckCommandExistAndExecutes(u8 command, u8 type, u8* buff, u8 length)
  */
 static void APP_DeviceAnnounce(u8 type,u8 *buff, u8 length)
 {
+    /* set flag */
     deviceAnnounceFlag = 1;
 }
 
@@ -147,6 +149,7 @@ static void APP_StopRun(u8 type, u8 *buff, u8 length)
 static void APP_UpDownFloor(u8 type, u8 *buff, u8 length)
 {
     updownFloorFlag = 1;
+    /* up or down ? */
 }
 
 /**

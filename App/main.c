@@ -29,7 +29,9 @@ int main(void)
     MAIN_Init();
     while(1)
 	{
+        /* check command form master then turn flag (and execute ??)*/
         MAIN_Proc();
+        /* check flag then respone to master, clear flag then execute */
         funcHandle_AllFlag();
     }
 }
